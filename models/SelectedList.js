@@ -7,13 +7,13 @@ class SelectedList {
         return this.list.findIndex(e => e.type === type);
     }
 
-    addItem(item){
+    addItem(item) {
         this.list.push(item);
     }
 
-    updateItem(item,index){
+    updateItem(item, index) {
         if (index > -1 && index < this.list.length)
-            this.list.splice(index, 1,item);
+            this.list.splice(index, 1, item);
     }
 
     removeItem(index) {
