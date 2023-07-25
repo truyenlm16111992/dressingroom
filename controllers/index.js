@@ -2,6 +2,7 @@ import ChoseItem from "../models/SelectedItem.js";
 import SelectedList from "../models/SelectedList.js";
 import data from "../data/Data.json" assert {type: 'json'};
 import SelectedItem from "../models/SelectedItem.js";
+
 const { navPills, tabPanes } = data;
 const selected = new SelectedList();
 let tabHTML = "";
@@ -47,7 +48,7 @@ const renderSelectedItem = () => {
         bikinitop: "../assets/images/allbody/bikini_branew.png",
         bikinibottom: "../assets/images/allbody/bikini_pantsnew.png",
         handbag: "",
-        feet: "../assets/images/shoes/shoes1.png",
+        feet: "../assets/images/allbody/foot.png",
         background: "../assets/images/background/background1.jpg"
     };
     selected.list.forEach(e => items[e.getPositionImg()] = e.imgSrc_png);
