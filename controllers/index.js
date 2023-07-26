@@ -5,6 +5,7 @@ import SelectedItem from "../models/SelectedItem.js";
 
 const { navPills, tabPanes } = data;
 const selected = new SelectedList();
+selected.loadLocalStorage();
 let tabHTML = "";
 let tabContainerHTML = "";
 navPills.forEach((navItem, navIndex) => {
@@ -25,7 +26,7 @@ navPills.forEach((navItem, navIndex) => {
             <div class="d-flex justify-content-center align-items-center mb-2">
                 <h6>${name}</h6>
             </div>
-            <button class="btn btn-secondary" onclick="selectItem('${id}', '${type}', '${imgSrc_png}')">Thử đồ</button>
+            <button class="select-item btn btn-secondary" onclick="selectItem('${id}', '${type}', '${imgSrc_png}')" data-id="${id}"></button>
         </div>
         `;
     }).join("");
@@ -53,7 +54,9 @@ const renderSelectedItem = () => {
     };
     selected.list.forEach(e => items[e.getPositionImg()] = e.imgSrc_png);
     Object.keys(items).forEach(e => getElement(`.${e}`).style.backgroundImage = `url("${items[e]}")`);
+    getElements(".select-item").forEach(e=>e.innerHTML=selected.findIndexById(e.dataset.id)>-1?"Bỏ chọn":"Thử đồ");
 }
+renderSelectedItem();
 window.selectItem = (id, type, img) => {
     const index = selected.findIndexByType(type);
     if (index < 0)
@@ -62,6 +65,7 @@ window.selectItem = (id, type, img) => {
         selected.removeItem(index);
     else
         selected.updateItem(new SelectedItem(id, type, img), index);
+    selected.saveLocalStorage();
     renderSelectedItem();
 }
 
